@@ -50,7 +50,7 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
         const {id} = router.query
 
         try {
-            const res: any = await fetch(`/api/pets/${id}`, {
+            const res: any = await fetch(`/api/tasks/${id}`, {
                 method: 'PUT',
                 headers: {
                     Accept: contentType,
@@ -64,7 +64,7 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
             }
 
             const {data} = await res.json()
-            mutate(`/api/pets/${id}`, data, false) // Update the local data without a revalidation
+            mutate(`/api/tasks/${id}`, data, false) // Update the local data without a revalidation
             router.push('/')
         } catch (error) {
             setMessage('Failed to update pet')
