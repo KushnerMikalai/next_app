@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import dbConnect from '../../utils/dbConnect'
-import Task from '../../models/Task'
+import dbConnect from '../../../utils/dbConnect'
+import Task from '../../../models/Task'
 
 export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
     const { method } = _req
