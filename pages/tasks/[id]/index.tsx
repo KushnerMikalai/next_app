@@ -5,6 +5,7 @@ import Link from 'next/link'
 import dbConnect from '../../../utils/dbConnect'
 import Task from '../../../models/Task'
 import { TaskType } from '../../../interfaces'
+import Layout from '../../../components/layouts'
 
 interface Props {
     task: TaskType;
@@ -20,51 +21,53 @@ const TaskPage: React.FC<Props> = ({task}) => {
             await fetch(`/api/tasks/${petID}`, {
                 method: 'Delete',
             })
-            router.push('/tasks')
+            await router.push('/tasks')
         } catch (error) {
             setMessage('Failed to delete the pet.')
         }
     }
 
     return (
-        <div key={task._id}>
-            <div className="card">
-                <img src={task.image_url}/>
-                <h5 className="pet-name">{task.name}</h5>
-                <div className="main-content">
-                    <p className="pet-name">{task.name}</p>
-                    <p className="owner">Owner: {task.owner_name}</p>
+        <Layout>
+            <div key={task._id}>
+                <div className="card">
+                    <img src={task.image_url}/>
+                    <h5 className="pet-name">{task.name}</h5>
+                    <div className="main-content">
+                        <p className="pet-name">{task.name}</p>
+                        <p className="owner">Owner: {task.owner_name}</p>
 
-                    {/* Extra task Info: Likes and Dislikes */}
-                    <div className="likes info">
-                        <p className="label">Likes</p>
-                        <ul>
-                            {task.likes.map((data, index) => (
-                                <li key={index}>{data} </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="dislikes info">
-                        <p className="label">Dislikes</p>
-                        <ul>
-                            {task.dislikes.map((data, index) => (
-                                <li key={index}>{data} </li>
-                            ))}
-                        </ul>
-                    </div>
+                        {/* Extra task Info: Likes and Dislikes */}
+                        <div className="likes info">
+                            <p className="label">Likes</p>
+                            <ul>
+                                {task.likes.map((data, index) => (
+                                    <li key={index}>{data} </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="dislikes info">
+                            <p className="label">Dislikes</p>
+                            <ul>
+                                {task.dislikes.map((data, index) => (
+                                    <li key={index}>{data} </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                    <div className="btn-container">
-                        <Link href="/[id]/edit" as={`/${task._id}/edit`}>
-                            <button className="btn edit">Edit</button>
-                        </Link>
-                        <button className="btn delete" onClick={handleDelete}>
-                            Delete
-                        </button>
+                        <div className="btn-container">
+                            <Link href="/[id]/edit" as={`/${task._id}/edit`}>
+                                <button className="btn edit">Edit</button>
+                            </Link>
+                            <button className="btn delete" onClick={handleDelete}>
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 </div>
+                {message && <p>{message}</p>}
             </div>
-            {message && <p>{message}</p>}
-        </div>
+        </Layout>
     )
 }
 

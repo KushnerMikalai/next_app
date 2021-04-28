@@ -1,27 +1,69 @@
-import React from 'react'
 import Link from 'next/link'
-import styles from '../../styles/Home.module.css'
+import React from 'react'
+import Nav from '../Nav'
 
 interface LayoutProps {
     children: React.ReactNode;
 }
 
 export default function Layout({children}: LayoutProps) {
-    return <div>
-        <nav>
-            <Link href={'/'}>Home</Link>
-            <Link href={'/tasks'}>Tasks</Link>
-        </nav>
-        {children}
-        <footer className={styles.footer}>
+    return <>
+        <div className="top-nav">
+            <span className="logo">
+                <Link href="/">
+                    <img src="/logo.svg" alt="app"/>
+                </Link>
+            </span>
+            <Nav/>
+        </div>
+        <div className="content">
+            {children}
+        </div>
+        <footer>
             <a
-                href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                href="https://github.com/KushnerMikalai"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                Powered by{' '}
-                <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo}/>
+                Code by Niko
             </a>
         </footer>
-    </div>
+
+        <style jsx>{`
+          footer {
+            width: 100%;
+            height: 100px;
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .content {
+            padding: 1rem;
+            background-color: #FAFAFA;
+          }
+
+          .top-nav {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.07);
+            background-color: #FFF;
+          }
+
+          .logo {
+            margin-right: 1rem;
+            display: inline-block;
+            font-size: 0;
+            cursor: pointer;
+          }
+
+          .logo img {
+            width: 2.4rem;
+            height: 2.4rem;
+          }
+        `}</style>
+    </>
 }

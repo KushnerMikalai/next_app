@@ -74,7 +74,7 @@ const TasksPage: React.FC<Props> = ({tasks}) => (
             margin-bottom: 1rem;
             padding: 1rem;
           }
-          
+
           .card__name {
             display: flex;
           }

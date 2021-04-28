@@ -2,7 +2,7 @@ import { useState, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
 
-type TaskForm = {
+interface TaskForm {
     name: string,
     owner_name: string,
     species: string,
@@ -14,23 +14,21 @@ type TaskForm = {
     dislikes: [],
 }
 
-type Error = {
-    name: string,
-    owner_name: string,
-    species: string,
-    image_url: string
+interface Error {
+    type: string,
+    value: string
 }
 
-type Form = {
-    forNewPet: boolean,
+interface Form {
+    forNewTask: boolean,
     formId: string,
     taskForm: any
 }
 
-const Form = ({formId, taskForm, forNewPet = true}: Form) => {
+const Form = ({formId, taskForm, forNewTask = true}: Form) => {
     const router = useRouter()
     const contentType = 'application/json'
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState<Error[]>([])
     const [message, setMessage] = useState('')
 
     const [form, setForm] = useState({
@@ -45,7 +43,6 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
         dislikes: taskForm.dislikes,
     })
 
-    /* The PUT method edits an existing entry in the mongodb database. */
     const putData = async (form: TaskForm) => {
         const {id} = router.query
 
@@ -64,14 +61,13 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
             }
 
             const {data} = await res.json()
-            mutate(`/api/tasks/${id}`, data, false) // Update the local data without a revalidation
-            router.push('/')
+            await mutate(`/api/tasks/${id}`, data, false)
+            await router.push('/tasks')
         } catch (error) {
             setMessage('Failed to update pet')
         }
     }
 
-    /* The POST method adds a new entry in the mongodb database. */
     const postData = async (form: TaskForm) => {
         try {
             const res: any = await fetch('/api/tasks', {
@@ -88,7 +84,7 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
                 throw new Error(res.status)
             }
 
-            router.push('/')
+            router.push('/tasks')
         } catch (error) {
             setMessage('Failed to add pet')
         }
@@ -96,8 +92,7 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
 
     const handleChange = (e: ChangeEvent): void => {
         const target = e.target as HTMLInputElement;
-        const value =
-            target.name === 'poddy_trained' ? target.checked : target.value
+        const value = target.name === 'poddy_trained' ? target.checked : target.value
         const name = target.name
 
         setForm({
@@ -106,29 +101,23 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
         })
     }
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        const errs = formValidate()
-        if (Object.keys(errs).length === 0) {
-            forNewPet ? await postData(form) : putData(form)
+        const errs = formValidate(form)
+        if (Array.isArray(errs) && errs.length === 0) {
+            forNewTask ? postData(form) : putData(form)
         } else {
-            setErrors({errs})
+            setErrors(errs)
         }
     }
 
-    /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
-    const formValidate = () => {
-        const err: Error = {
-            name: '',
-            owner_name: '',
-            species: '',
-            image_url: ''
-        }
-        if (!form.name) err.name = 'Name is required'
-        if (!form.owner_name) err.owner_name = 'Owner is required'
-        if (!form.species) err.species = 'Species is required'
-        if (!form.image_url) err.image_url = 'Image URL is required'
-        return err
+    const formValidate = (form: TaskForm) => {
+        const errs: Error[] = []
+        if (!form.name) errs.push({type: 'name', value: 'Name is required'})
+        if (!form.owner_name) errs.push({type: 'owner_name', value: 'Owner is required'})
+        if (!form.species) errs.push({type: 'species', value: 'Species is required'})
+        if (!form.image_url) errs.push({type: 'image_url', value: 'Image URL is required'})
+        return errs
     }
 
     return (
@@ -223,8 +212,8 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
             </form>
             <p>{message}</p>
             <div>
-                {Object.keys(errors).map((err, index) => (
-                    <li key={index}>{err}</li>
+                {errors.map((err: Error, index) => (
+                    <li key={index}>{err.type} - {err.value}</li>
                 ))}
             </div>
 
@@ -237,7 +226,7 @@ const Form = ({formId, taskForm, forNewPet = true}: Form) => {
               }
 
               label {
-                display: ${forNewPet ? 'inline-block' : 'block'};
+                display: ${forNewTask ? 'inline-block' : 'block'};
                 width: 100%;
                 margin-bottom: .2rem;
               }
