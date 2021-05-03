@@ -14,6 +14,7 @@ interface Props {
 const TaskPage: React.FC<Props> = ({task}) => {
     const router = useRouter()
     const [message, setMessage] = useState('')
+
     const handleDelete = async () => {
         const petID = router.query.id
 
@@ -31,7 +32,7 @@ const TaskPage: React.FC<Props> = ({task}) => {
         <Layout>
             <div key={task._id}>
                 <div className="card">
-                    <img src={task.image_url}/>
+                    <img src={task.image_url} alt={task.name}/>
                     <h5 className="pet-name">{task.name}</h5>
                     <div className="main-content">
                         <p className="pet-name">{task.name}</p>
@@ -56,7 +57,7 @@ const TaskPage: React.FC<Props> = ({task}) => {
                         </div>
 
                         <div className="btn-container">
-                            <Link href="/[id]/edit" as={`/${task._id}/edit`}>
+                            <Link href="/[id]/edit" as={`/tasks/${task._id}/edit`}>
                                 <button className="btn edit">Edit</button>
                             </Link>
                             <button className="btn delete" onClick={handleDelete}>

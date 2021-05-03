@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Layout from '../components/layouts'
+import Counter from '../features/counter/Counter'
 
 const Index = () => (
     <Layout>
@@ -10,7 +11,7 @@ const Index = () => (
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main>
-                TODO
+                <Counter/>
             </main>
         </>
     </Layout>
