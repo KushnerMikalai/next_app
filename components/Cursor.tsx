@@ -35,6 +35,7 @@ const Cursor = () => {
         document.removeEventListener("mouseup", onMouseUp)
     }
 
+    // @ts-ignore
     const onMouseMove = (e) => {
         setPosition({ x: e.clientX, y: e.clientY })
     }

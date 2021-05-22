@@ -9,7 +9,7 @@ const reducers = combineReducers({
     counter: counterReducer,
 })
 
-const makeStore = (): Store =>
+export const makeStore = (): Store =>
     configureStore({
         reducer: reducers
     })

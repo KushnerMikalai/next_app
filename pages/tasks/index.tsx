@@ -2,6 +2,10 @@ import React, { useEffect } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig } = getConfig()
+const { NEXTAUTH_URL } = publicRuntimeConfig
 
 import { useAppDispatch } from '../../store/hooks'
 import { showPageLoader, hidePageLoader } from '../../store/slices/rootSlice'
@@ -88,7 +92,7 @@ TasksPage.getInitialProps = async (ctx) => {
     await dispatch(showPageLoader())
 
     // TODO: move to store dispatch
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/tasks`)
+    const res = await fetch(`${NEXTAUTH_URL}/api/tasks`)
     const json = await res.json()
     return {
         tasks: json.data,

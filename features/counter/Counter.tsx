@@ -52,12 +52,14 @@ function Counter() {
                 </button>
                 <button
                     className={styles.asyncButton}
+                    // @ts-ignore
                     onClick={() => dispatch(incrementAsync(incrementValue))}
                 >
                     Add Async
                 </button>
                 <button
                     className={styles.button}
+                    // @ts-ignore
                     onClick={() => dispatch(incrementIfOdd(incrementValue))}
                 >
                     Add If Odd
