@@ -1,38 +1,20 @@
-import Link from 'next/link'
-import React from "react"
-import { useRouter } from 'next/router'
-
-interface LinkActiveType {
-    href: string,
-    children: React.ReactNode
-}
-
-const LinkActive = ({ href, children }: LinkActiveType) => {
-    const router = useRouter()
-
-    // @ts-ignore
-    let className = children.props.className || ''
-    if (router.pathname === href) {
-        className = `${className} link_selected`
-    }
-
-    // @ts-ignore
-    return <Link href={href}>{React.cloneElement(children, { className })}</Link>
-}
+import NavAuth from './NavAuth'
+import UiLink from './UiLink'
 
 export default function Nav() {
     return <>
         <nav>
-            <LinkActive href={'/'}>
+            <UiLink href={'/'}>
                 <a className="link">Home</a>
-            </LinkActive>
-            <LinkActive href={'/tasks'}>
+            </UiLink>
+            <UiLink href={'/tasks'}>
                 <a className="link">Tasks</a>
-            </LinkActive>
-            <LinkActive href={'/tasks/new'}>
+            </UiLink>
+            <UiLink href={'/tasks/new'}>
                 <a className="link">New Task</a>
-            </LinkActive>
+            </UiLink>
         </nav>
+        <NavAuth />
         <style jsx>{`
           nav {
             font-size: .9rem;
@@ -40,10 +22,13 @@ export default function Nav() {
 
           .link {
             display: inline-block;
+            color: var(--gray-11);
           }
-          .link_selected {
-            color: #6979F8;
+
+          .link.selected {
+            color: var(--red);
           }
+
           .link:not(:last-child) {
             margin-right: 1rem;
           }

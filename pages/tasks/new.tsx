@@ -1,5 +1,4 @@
 import Form from '../../components/Form'
-import Layout from '../../components/layouts'
 
 const NewPet = () => {
     const taskForm = {
@@ -14,9 +13,13 @@ const NewPet = () => {
         dislikes: [],
     }
 
-    return <Layout>
-        <Form formId="add-pet-form" taskForm={taskForm} forNewTask={true}/>
-    </Layout>
+    return <div>
+        <Form
+            formId="add-pet-form"
+            taskForm={taskForm}
+            forNewTask={true}
+        />
+    </div>
 }
 
 export default NewPet

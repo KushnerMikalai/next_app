@@ -1,19 +1,26 @@
 import Link from 'next/link'
 import React from 'react'
-import Nav from '../Nav'
+
+import { useAppSelector } from '../store/hooks'
+
+import Nav from './Nav'
+import PageLoader from './PageLoader'
+
+import { selectPageLoader } from '../store/slices/rootSlice'
 
 interface LayoutProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 export default function Layout({children}: LayoutProps) {
+    const pageLoader = useAppSelector(selectPageLoader)
+
     return <>
+        {pageLoader && <PageLoader />}
         <div className="top-nav">
-            <span className="logo">
-                <Link href="/">
-                    <img src="/logo.svg" alt="app"/>
-                </Link>
-            </span>
+            <Link href="/">
+                <a className="logo"></a>
+            </Link>
             <Nav/>
         </div>
         <div className="content">
@@ -54,15 +61,31 @@ export default function Layout({children}: LayoutProps) {
           }
 
           .logo {
+            position: relative;
             margin-right: 1rem;
             display: inline-block;
             font-size: 0;
             cursor: pointer;
+            width: 2rem;
+            height: 2rem;
           }
 
-          .logo img {
-            width: 2.4rem;
-            height: 2.4rem;
+          .logo::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transition: all 60ms ease;
+            transform: translate(-50%, -50%);
+            border: 1px solid #000;
+            border-radius: 50%;
+          }
+
+          .logo:active::before {
+            width: 76%;
+            height: 76%;
           }
         `}</style>
     </>

@@ -1,14 +1,14 @@
-import { GetServerSideProps } from 'next'
 import React, { useState } from 'react'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+
 import dbConnect from '../../../utils/dbConnect'
 import Task from '../../../models/Task'
 import { TaskType } from '../../../interfaces'
-import Layout from '../../../components/layouts'
 
 interface Props {
-    task: TaskType;
+    task: TaskType
 }
 
 const TaskPage: React.FC<Props> = ({task}) => {
@@ -29,46 +29,43 @@ const TaskPage: React.FC<Props> = ({task}) => {
     }
 
     return (
-        <Layout>
-            <div key={task._id}>
-                <div className="card">
-                    <img src={task.image_url} alt={task.name}/>
-                    <h5 className="pet-name">{task.name}</h5>
-                    <div className="main-content">
-                        <p className="pet-name">{task.name}</p>
-                        <p className="owner">Owner: {task.owner_name}</p>
+        <div key={task._id}>
+            <div className="card">
+                <img src={task.image_url} alt={task.name}/>
+                <h5 className="pet-name">{task.name}</h5>
+                <div className="main-content">
+                    <p className="pet-name">{task.name}</p>
+                    <p className="owner">Owner: {task.owner_name}</p>
 
-                        {/* Extra task Info: Likes and Dislikes */}
-                        <div className="likes info">
-                            <p className="label">Likes</p>
-                            <ul>
-                                {task.likes.map((data, index) => (
-                                    <li key={index}>{data} </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="dislikes info">
-                            <p className="label">Dislikes</p>
-                            <ul>
-                                {task.dislikes.map((data, index) => (
-                                    <li key={index}>{data} </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div className="likes info">
+                        <p className="label">Likes</p>
+                        <ul>
+                            {task.likes.map((data, index) => (
+                                <li key={index}>{data} </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="dislikes info">
+                        <p className="label">Dislikes</p>
+                        <ul>
+                            {task.dislikes.map((data, index) => (
+                                <li key={index}>{data} </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                        <div className="btn-container">
-                            <Link href="/[id]/edit" as={`/tasks/${task._id}/edit`}>
-                                <button className="btn edit">Edit</button>
-                            </Link>
-                            <button className="btn delete" onClick={handleDelete}>
-                                Delete
-                            </button>
-                        </div>
+                    <div className="btn-container">
+                        <Link href="/[id]/edit" as={`/tasks/${task._id}/edit`}>
+                            <button className="btn edit">Edit</button>
+                        </Link>
+                        <button className="btn delete" onClick={handleDelete}>
+                            Delete
+                        </button>
                     </div>
                 </div>
-                {message && <p>{message}</p>}
             </div>
-        </Layout>
+            {message && <p>{message}</p>}
+        </div>
     )
 }
 

@@ -1,26 +1,30 @@
-import React from 'react'
-import dbConnect from '../../utils/dbConnect'
-import Task from '../../models/Task'
-import { TaskType } from '../../interfaces'
+import React, { useEffect } from 'react'
+import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from '../../components/layouts'
+
+import { useAppDispatch } from '../../store/hooks'
+import { showPageLoader, hidePageLoader } from '../../store/slices/rootSlice'
+
+import { TaskType } from '../../interfaces'
 
 interface Props {
-    tasks: TaskType[];
+    tasks: TaskType[]
 }
 
-const TasksPage: React.FC<Props> = ({tasks}) => (
-    <Layout>
+const TasksPage: NextPage<Props> = ({tasks}) => {
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(hidePageLoader())
+    }, [dispatch])
+
+    return (
         <div>
             <Head>
-                <title>tasks</title>
-                <link rel="icon" href="/favicon.ico"/>
+                <title>Tasks</title>
             </Head>
-
             <main className="task-list">
-                {/*<h1 className={styles.title}>Welcome to <a href="https://nextjs.org">Next.js!</a></h1>*/}
-
                 {tasks.map((task) => (
                     <div key={task._id} className="card">
                         <div className="card__name">
@@ -30,8 +34,6 @@ const TasksPage: React.FC<Props> = ({tasks}) => (
                         <div className="main-content">
                             <p className="pet-name">{task.name}</p>
                             <p className="owner">Owner: {task.owner_name}</p>
-
-                            {/* Extra Pet Info: Likes and Dislikes */}
                             <div className="likes info">
                                 <p className="label">Likes</p>
                                 <ul>
@@ -61,39 +63,40 @@ const TasksPage: React.FC<Props> = ({tasks}) => (
                     </div>
                 ))}
             </main>
+            <style jsx>{`
+            .task-list {
+                margin: 0 auto;
+                max-width: 50rem;
+            }
+
+            .card {
+                border: 1px solid #0070f3;
+                margin-bottom: 1rem;
+                padding: 1rem;
+            }
+
+            .card__name {
+                display: flex;
+            }
+            `}</style>
         </div>
-
-        <style jsx>{`
-          .task-list {
-            margin: 0 auto;
-            max-width: 50rem;
-          }
-
-          .card {
-            border: 1px solid #0070f3;
-            margin-bottom: 1rem;
-            padding: 1rem;
-          }
-
-          .card__name {
-            display: flex;
-          }
-        `}</style>
-    </Layout>
-)
-
-export async function getServerSideProps() {
-    await dbConnect()
-
-    /* find all the data in our database */
-    const result = await Task.find({})
-    const tasks = result.map((doc) => {
-        const task = doc.toObject()
-        task._id = task._id.toString()
-        return task
-    })
-
-    return {props: {tasks}}
+    )
 }
+
+TasksPage.getInitialProps = async (ctx) => {
+    const { dispatch } = ctx.store
+    await dispatch(showPageLoader())
+
+    // TODO: move to store dispatch
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/tasks`)
+    const json = await res.json()
+    return {
+        tasks: json.data,
+    }
+}
+
+// export async function getServerSideProps() {
+//     return {props: {}}
+// }
 
 export default TasksPage

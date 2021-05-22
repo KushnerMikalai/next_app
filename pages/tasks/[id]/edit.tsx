@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
+
 import Form from '../../../components/Form'
-import Layout from '../../../components/layouts'
 
 const fetcher = (url: string) =>
     fetch(url)
@@ -28,9 +28,13 @@ const EditTask = () => {
         dislikes: task.dislikes,
     }
 
-    return <Layout>
-        <Form formId="edit-task-form" taskForm={tasksForm} forNewTask={false}/>
-    </Layout>
+    return <div>
+        <Form
+            formId="edit-task-form"
+            taskForm={tasksForm}
+            forNewTask={false}
+        />
+    </div>
 }
 
 export default EditTask
