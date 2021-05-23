@@ -14,6 +14,9 @@ export default NextAuth({
                     // Strip protocol from URL and use domain as site name
                     const site = baseUrl.replace(/^https?:\/\//, '')
 
+                    console.log(site, 'site')
+                    console.log(server, 'server')
+
                     nodemailer
                         .createTransport(server)
                         .sendMail({
@@ -24,6 +27,7 @@ export default NextAuth({
                             html: html({url, site, email})
                         }, (error) => {
                             if (error) {
+                                console.log(error)
                                 // logger.error('SEND_VERIFICATION_EMAIL_ERROR', email, error)
                                 // @ts-ignore
                                 return reject(new Error('SEND_VERIFICATION_EMAIL_ERROR', error))
@@ -54,5 +58,5 @@ export default NextAuth({
         // async jwt(token, user, account, profile, isNewUser) { return token }
     },
     events: {},
-    debug: false,
+    debug: true,
 })
