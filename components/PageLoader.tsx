@@ -14,6 +14,8 @@ function PageLoader() {
                     height: 100%;
                     z-index: 10;
                     background-color: #fff;
+                    opacity: .6;
+                    cursor: wait;
                 }
 
                 .page-loader__content {

@@ -87,8 +87,8 @@ const TasksPage: NextPage<Props> = ({tasks}) => {
     )
 }
 
-TasksPage.getInitialProps = async (ctx) => {
-    const { dispatch } = ctx.store
+TasksPage.getInitialProps = async ({ store }) => {
+    const { dispatch } = store
     await dispatch(showPageLoader())
 
     // TODO: move to store dispatch
