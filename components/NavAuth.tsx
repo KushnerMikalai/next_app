@@ -18,6 +18,9 @@ function NavAuth() {
 
     const [providers, setProviders] = useState<Provider[]>([]);
 
+    const userName = session && session.user ? session.user.email || session.user.name : ''
+    const userShortName = userName ? `${userName[0]}${userName[1]}` : ''
+
     useEffect(() => {
         async function getProvidersList() {
             const providers = await getProviders()
@@ -51,17 +54,18 @@ function NavAuth() {
                     <div className="nav-user">
                         <div className="nav-user__content">
                             {
-                                session.user.image &&
-                                <span
-                                    className="nav-user__avatar"
-                                    style={{backgroundImage: `url(${session.user.image})`}}
-                                ></span>
+                                session.user.image ?
+                                    <div className="nav-user__avatar">
+                                        <img
+                                            className="nav-user__avatar-img"
+                                            src={session.user.image}
+                                            alt={userShortName}
+                                        />
+                                    </div> :
+                                    <div className="nav-user__avatar nav-user__avatar_no-image">
+                                        <span>{userShortName}</span>
+                                    </div>
                             }
-                            <span>
-                                <small>Signed in as</small>
-                                <br/>
-                                <strong>{session.user.email || session.user.name}</strong>
-                            </span>
                         </div>
                         <a
                             href={`/api/auth/signout`}
@@ -114,18 +118,30 @@ function NavAuth() {
                 .nav-user__content {
                     display: flex;
                     align-items: center;
-                    margin-right: 1rem;
+                    margin-right: 20px;
                 }
 
                 .nav-user__avatar {
                     display: inline-block;
-                    background-position: center;
-                    background-size: contain;
                     border-radius: 50%;
                     overflow: hidden;
-                    width: 2.5rem;
-                    height: 2.5rem;
-                    margin-right: .6rem;
+                    width: 34px;
+                    height: 34px;
+                }
+
+                .nav-user__avatar_no-image {
+                    padding: 0;
+                    border: 1px solid #000;
+                    text-transform: uppercase;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .nav-user__avatar-img {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
                 }
             `}</style>
         </>

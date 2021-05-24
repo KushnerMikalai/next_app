@@ -1,9 +1,18 @@
 :root {
+    --gray-4: #f0f0f0;
     --gray-5: #d9d9d9;
+    --gray-6: #bfbfbf;
     --gray-7: #8c8c8c;
     --gray-9: #434343;
     --gray-11: #1f1f1f;
 
+    --blue-4: #69c0ff;
+    --blue-7: #096dd9;
+
     --red: #DA291C; /* 485-C */
+
+    --primary-1: #fff1ed;
+    --primary-5: #e65343;
+    --primary-6: #da291c;
   }
 

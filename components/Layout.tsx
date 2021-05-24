@@ -15,78 +15,81 @@ interface LayoutProps {
 export default function Layout({children}: LayoutProps) {
     const pageLoader = useAppSelector(selectPageLoader)
 
-    return <>
-        {pageLoader && <PageLoader />}
-        <div className="top-nav">
-            <Link href="/">
-                <a className="logo"></a>
-            </Link>
-            <Nav/>
+    return (
+        <div className="layout">
+            {pageLoader && <PageLoader />}
+            <header className="header">
+                <Link href="/">
+                    <a
+                        className="logo"
+                        data-category="Site-Wide Custom Events"
+                        data-label="Site logo"
+                    >
+                        <img src="/logo_laveha.svg" alt="Laveha" />
+                    </a>
+                </Link>
+                <Nav/>
+            </header>
+            <main className="content">
+                {children}
+            </main>
+            <footer className="footer">
+                <a
+                    href="https://github.com/KushnerMikalai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Code by Niko
+                </a>
+            </footer>
+
+            <style jsx>{`
+                .layout {
+                    display: grid;
+                    grid-template-areas: "header" "content" "footer";
+                    grid-template-columns: 1fr;
+                    grid-template-rows: auto 1fr auto;
+                    height: 100%;
+                }
+
+                .header {
+                    grid-area: header;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    height: 52px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    background-color: #FFF;
+                    border-bottom: 1px solid var(--gray-11);
+                }
+
+                .content {
+                    grid-area: content;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+
+                .footer {
+                    grid-area: footer;
+                    width: 100%;
+                    height: 52px;
+                    border-top: 1px solid var(--gray-11);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .logo {
+                    margin-right: 1rem;
+                    display: inline-block;
+                    font-size: 0;
+                }
+                .logo img {
+                    width: 72px;
+                    height: 24px;
+                }
+            `}</style>
         </div>
-        <div className="content">
-            {children}
-        </div>
-        <footer>
-            <a
-                href="https://github.com/KushnerMikalai"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Code by Niko
-            </a>
-        </footer>
-
-        <style jsx>{`
-          footer {
-            width: 100%;
-            height: 100px;
-            border-top: 1px solid #eaeaea;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .content {
-            padding: 1rem;
-            background-color: #FAFAFA;
-          }
-
-          .top-nav {
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.07);
-            background-color: #FFF;
-          }
-
-          .logo {
-            position: relative;
-            margin-right: 1rem;
-            display: inline-block;
-            font-size: 0;
-            cursor: pointer;
-            width: 2rem;
-            height: 2rem;
-          }
-
-          .logo::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            transition: all 60ms ease;
-            transform: translate(-50%, -50%);
-            border: 1px solid #000;
-            border-radius: 50%;
-          }
-
-          .logo:active::before {
-            width: 76%;
-            height: 76%;
-          }
-        `}</style>
-    </>
+    )
 }
