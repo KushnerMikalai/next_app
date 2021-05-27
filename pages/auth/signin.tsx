@@ -69,7 +69,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                                 key={provider.name}
                             >
                                 <UiButton
-                                    icon={`/icons/icon-${provider.name}.svg`}
+                                    icon={`/icons/icon-${provider.name.toLowerCase()}.svg`}
                                     minWidth="228px"
                                     onClick={() => signIn(provider.id)}
                                 >
