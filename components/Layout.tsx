@@ -1,11 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
-
 import { useAppSelector } from '../store/hooks'
-
 import Nav from './Nav'
 import PageLoader from './PageLoader'
-
 import { selectPageLoader } from '../store/slices/rootSlice'
 
 interface LayoutProps {

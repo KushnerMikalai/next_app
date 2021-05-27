@@ -7,9 +7,9 @@ const Index = () => (
             <title>Laveha</title>
             <link rel="icon" href="/favicon.ico"/>
         </Head>
-        <main>
+        <div>
             <h1>Index</h1>
-        </main>
+        </div>
     </>
 )
 

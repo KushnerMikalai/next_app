@@ -1,11 +1,7 @@
-import React, { MouseEvent, useEffect, useState } from 'react'
+import React, { MouseEvent } from 'react'
 import { useRouter } from 'next/router'
-import { signOut, useSession, getProviders, signIn, Provider } from 'next-auth/client'
-
-interface Provider {
-    name: string
-    id: string
-}
+import { signOut, useSession } from 'next-auth/client'
+import Link from 'next/link'
 
 async function handleSignOut(e: MouseEvent) {
     e.preventDefault()
@@ -16,55 +12,32 @@ function NavAuth() {
     const [session] = useSession()
     const router = useRouter()
 
-    const [providers, setProviders] = useState<Provider[]>([]);
-
     const userName = session && session.user ? session.user.email || session.user.name : ''
     const userShortName = userName ? `${userName[0]}${userName[1]}` : ''
-
-    useEffect(() => {
-        async function getProvidersList() {
-            const providers = await getProviders()
-            const providersList = providers ? Object.values(providers) : [];
-            setProviders(providersList)
-        }
-
-        if (!session) {
-            getProvidersList()
-        }
-    }, [])
-
     const signInActive = router.pathname === '/auth/signin'
 
     return (
         <>
             <div className="auth">
-                {!session && providers &&
-                    providers.map((provider) => (
-                        <div key={provider.name}>
-                            <button
-                                className="link"
-                                onClick={() => signIn(provider.id)}
-                            >
-                                Sign in with {provider.name}
-                            </button>
-                        </div>
-                    ))
+                {!session &&
+                    <Link href="/auth/signin">
+                        <a className="link">Sign in</a>
+                    </Link>
                 }
                 {session?.user && (
                     <div className="nav-user">
                         <div className="nav-user__content">
-                            {
-                                session.user.image ?
-                                    <div className="nav-user__avatar">
-                                        <img
-                                            className="nav-user__avatar-img"
-                                            src={session.user.image}
-                                            alt={userShortName}
-                                        />
-                                    </div> :
-                                    <div className="nav-user__avatar nav-user__avatar_no-image">
-                                        <span>{userShortName}</span>
-                                    </div>
+                            {session.user.image ?
+                                <div className="nav-user__avatar">
+                                    <img
+                                        className="nav-user__avatar-img"
+                                        src={session.user.image}
+                                        alt={userShortName}
+                                    />
+                                </div> :
+                                <div className="nav-user__avatar nav-user__avatar_no-image">
+                                    <span>{userShortName}</span>
+                                </div>
                             }
                         </div>
                         <a
