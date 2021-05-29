@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { getProviders, signIn, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+
 import UiButton from '../../components/UiButton'
 
 interface Provider {
@@ -51,6 +52,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                         className="sign-in__hello"
                     >
                         <h1>Welcom to a Laveha</h1>
+                        <p>Budget planning and cost accounting</p>
                     </div>
                 </div>
                 <div className="sign-in__section sign-in__section_providers">
@@ -62,6 +64,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </div>
+                    <h2 className="la-label">Sign in with:</h2>
                     <div className="provider-list">
                         {Object.values(providers).map((provider) => (
                             <div
@@ -70,10 +73,10 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                             >
                                 <UiButton
                                     icon={`/icons/icon-${provider.name.toLowerCase()}.svg`}
-                                    minWidth="228px"
+                                    minWidth="120px"
                                     onClick={() => signIn(provider.id)}
                                 >
-                                    {`Sign in with ${provider.name}`}
+                                    {provider.name}
                                 </UiButton>
                             </div>
                         ))}
@@ -81,6 +84,22 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                 </div>
 
                 <style jsx>{`
+                    .provider-list {
+                        display: flex;
+                    }
+
+                    .provider-button:not(:last-child) {
+                        margin-right: 10px;
+                    }
+
+                    .la-label {
+                        display: inline-block;
+                        margin-bottom: 10px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        font-family: var(--primaryFontFamily);
+                    }
+
                     .provider-button {
                         margin-bottom: 15px;
                     }
@@ -108,6 +127,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                     .sign-in__section_providers {
                         position: relative;
                         display: flex;
+                        flex-direction: column;
                         align-items: center;
                         justify-content: center;
                         border-left: 1px solid #000;

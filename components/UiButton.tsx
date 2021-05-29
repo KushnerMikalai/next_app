@@ -11,15 +11,16 @@ interface Props {
 const UiButton: React.FC<Props> = ({ icon, children, width, minWidth, onClick }) => {
     return (
         <button
-            className="button"
+            className="ui-button"
             onClick={onClick}
         >
-            <span className="button__content">
-                {icon && <i className="button__icon"></i>}
+            <span className="ui-button-content">
+                {icon && <i className="ui-button-icon"></i>}
                 {children}
             </span>
+
             <style jsx>{`
-                .button {
+                .ui-button {
                     display: inline-block;
                     width: ${width || 'initial'};
                     min-width: ${minWidth || 'initial'};
@@ -27,28 +28,30 @@ const UiButton: React.FC<Props> = ({ icon, children, width, minWidth, onClick })
                     text-transform: uppercase;
                     color: #000;
                     padding: .5rem 1.2rem;
-                    border: 1px solid #000;
+                    border: 1px solid var(--gray-6);
                     border-radius: .3rem;
                     transition: all 100ms ease;
                     cursor: pointer;
                     background-color: initial;
                 }
 
-                .button:hover {
-                    opacity: .6;
+                .ui-button:hover {
+                    border: 1px solid var(--primary-6);
                 }
 
-                .button:active {
+                .ui-button:active {
                     opacity: 1;
                 }
 
-                .button__content {
+                .ui-button-content {
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    font-family: var(--primaryFontFamily);
+                    font-weight: 600;
                 }
 
-                .button__icon {
+                .ui-button-icon {
                     margin-right: 10px;
                     display: inline-block;
                     background-image: ${icon ? `url(${icon})` : 'initial'};

@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
 import { useAppSelector } from '../store/hooks'
+import { selectPageLoader } from '../store/slices/rootSlice'
+
 import Nav from './Nav'
 import PageLoader from './PageLoader'
-import { selectPageLoader } from '../store/slices/rootSlice'
+import Footer from './Footer'
 
 interface LayoutProps {
     children: React.ReactNode
@@ -30,15 +32,7 @@ export default function Layout({children}: LayoutProps) {
             <main className="content">
                 {children}
             </main>
-            <footer className="footer">
-                <a
-                    href="https://github.com/KushnerMikalai"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Code by Niko
-                </a>
-            </footer>
+            <Footer/>
 
             <style jsx>{`
                 .layout {
@@ -58,23 +52,13 @@ export default function Layout({children}: LayoutProps) {
                     padding-left: 20px;
                     padding-right: 20px;
                     background-color: #FFF;
-                    border-bottom: 1px solid var(--gray-11);
+                    border-bottom: 1px solid var(--gray-4);
                 }
 
                 .content {
                     grid-area: content;
                     padding-left: 20px;
                     padding-right: 20px;
-                }
-
-                .footer {
-                    grid-area: footer;
-                    width: 100%;
-                    height: 52px;
-                    border-top: 1px solid var(--gray-11);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
                 }
 
                 .logo {
@@ -84,7 +68,6 @@ export default function Layout({children}: LayoutProps) {
                 }
                 .logo img {
                     width: 72px;
-                    height: 24px;
                 }
             `}</style>
         </div>

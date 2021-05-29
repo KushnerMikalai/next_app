@@ -68,7 +68,7 @@ function NavAuth() {
                     text-transform: uppercase;
                     color: ${signInActive ? 'var(--red)' : '#000'};
                     padding: .5rem 1.2rem;
-                    border: 1px solid ${signInActive ? 'var(--red)' : '#000'};
+                    border: 1px solid ${signInActive ? 'var(--red)' : 'var(--gray-6)'};
                     border-radius: .3rem;
                     transition: all 100ms ease;
                     cursor: ${signInActive ? 'default' : 'pointer'};
@@ -76,7 +76,7 @@ function NavAuth() {
                 }
 
                 .link:hover {
-                    opacity: ${signInActive ? 1 : .6};
+                    border: 1px solid var(--primary-6);
                 }
 
                 .link:active {

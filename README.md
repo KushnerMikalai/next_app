@@ -1,5 +1,4 @@
 # Laveha
-### - a project to collect data on the state of the personal or budget of the company
+### budget planning and cost accounting
 
-- [Demo](https://next-test-js.vercel.app/)
-- [Next.js Documentation](https://nextjs.org/docs)
+- [Site](https://next-test-js.vercel.app/)

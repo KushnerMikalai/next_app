@@ -1,16 +1,16 @@
 import NavAuth from './NavAuth'
-import UiLink from './UiLink'
+// import UiLink from './UiLink'
 
 export default function Nav() {
     return (
         <>
             <nav>
-                <UiLink href={'/tasks'}>
+                {/* <UiLink href={'/tasks'}>
                     <a className="link">Tasks</a>
                 </UiLink>
                 <UiLink href={'/tasks/new'}>
                     <a className="link">New Task</a>
-                </UiLink>
+                </UiLink> */}
             </nav>
             <NavAuth />
             <style jsx>{`
