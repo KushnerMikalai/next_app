@@ -1,21 +1,34 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 
 interface Props {
     width?: string
     minWidth?: string
+    iconCustom?: string
     icon?: string
     children?: React.ReactNode
-    onClick: () => void
+    onClick?: (e: MouseEvent) => void
 }
 
-const UiButton: React.FC<Props> = ({ icon, children, width, minWidth, onClick }) => {
+const UiButton: React.FC<Props> = ({ iconCustom, icon, children, width, minWidth, onClick }) => {
     return (
         <button
             className="ui-button"
             onClick={onClick}
         >
             <span className="ui-button-content">
-                {icon && <i className="ui-button-icon"></i>}
+                {iconCustom && <i className="ui-button-icon"></i>}
+                {!iconCustom && icon &&
+                    // TODO: move to UiIcon component
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="ui-button-icon-hero"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={icon} />
+                    </svg>
+                }
                 {children}
             </span>
 
@@ -51,10 +64,16 @@ const UiButton: React.FC<Props> = ({ icon, children, width, minWidth, onClick })
                     font-weight: 600;
                 }
 
+                .ui-button-icon-hero {
+                    margin-right: 10px;
+                    display: inline-block;
+                    width: 16px;
+                }
+
                 .ui-button-icon {
                     margin-right: 10px;
                     display: inline-block;
-                    background-image: ${icon ? `url(${icon})` : 'initial'};
+                    background-image: ${iconCustom ? `url(${iconCustom})` : 'initial'};
                     width: 16px;
                     height: 16px;
                     background-size: contain;

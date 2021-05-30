@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react'
-import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
 import Link from 'next/link'
+import UiButton from '../components/UiButton'
 
 async function handleSignOut(e: MouseEvent) {
     e.preventDefault()
@@ -10,43 +10,49 @@ async function handleSignOut(e: MouseEvent) {
 
 function NavAuth() {
     const [session] = useSession()
-    const router = useRouter()
 
     const userName = session && session.user ? session.user.email || session.user.name : ''
     const userShortName = userName ? `${userName[0]}${userName[1]}` : ''
-    const signInActive = router.pathname === '/auth/signin'
 
     return (
         <>
             <div className="auth">
                 {!session &&
                     <Link href="/auth/signin">
-                        <a className="link">Sign in</a>
+                        <a>
+                            <UiButton
+                                icon={'M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'}
+                            >
+                                Sign in
+                            </UiButton>
+                        </a>
                     </Link>
                 }
                 {session?.user && (
                     <div className="nav-user">
                         <div className="nav-user__content">
                             {session.user.image ?
-                                <div className="nav-user__avatar">
-                                    <img
-                                        className="nav-user__avatar-img"
-                                        src={session.user.image}
-                                        alt={userShortName}
-                                    />
-                                </div> :
+                                <Link href="/profile">
+                                    <a className="nav-user__avatar">
+                                        <img
+                                            className="nav-user__avatar-img"
+                                            src={session.user.image}
+                                            alt={userShortName}
+                                        />
+                                    </a>
+                                </Link>
+                                :
                                 <div className="nav-user__avatar nav-user__avatar_no-image">
                                     <span>{userShortName}</span>
                                 </div>
                             }
                         </div>
-                        <a
-                            href={`/api/auth/signout`}
-                            onClick={handleSignOut}
-                            className="link"
+                        <UiButton
+                            onClick={(e) => handleSignOut(e)}
+                            icon={'M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'}
                         >
-                            Sign out
-                        </a>
+                            Sign in
+                        </UiButton>
                     </div>
                 )}
             </div>
@@ -62,25 +68,9 @@ function NavAuth() {
                     border: 1px solid #eaeaea;
                 }
 
-                .link {
-                    display: inline-block;
-                    font-size: .8rem;
-                    text-transform: uppercase;
-                    color: ${signInActive ? 'var(--red)' : '#000'};
-                    padding: .5rem 1.2rem;
-                    border: 1px solid ${signInActive ? 'var(--red)' : 'var(--gray-6)'};
-                    border-radius: .3rem;
-                    transition: all 100ms ease;
-                    cursor: ${signInActive ? 'default' : 'pointer'};
-                    background-color: initial;
-                }
-
-                .link:hover {
-                    border: 1px solid var(--primary-6);
-                }
-
-                .link:active {
-                    opacity: 1;
+                .button-icon {
+                    width: 18px;
+                    margin-right: 5px;
                 }
 
                 .nav-user {

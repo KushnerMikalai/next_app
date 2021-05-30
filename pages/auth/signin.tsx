@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { getProviders, signIn, useSession } from 'next-auth/client'
+import { getProviders, signIn, useSession, getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 
 import UiButton from '../../components/UiButton'
@@ -72,7 +72,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                                 key={provider.name}
                             >
                                 <UiButton
-                                    icon={`/icons/icon-${provider.name.toLowerCase()}.svg`}
+                                    iconCustom={`/icons/icon-${provider.name.toLowerCase()}.svg`}
                                     minWidth="120px"
                                     onClick={() => signIn(provider.id)}
                                 >
@@ -130,7 +130,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
-                        border-left: 1px solid #000;
+                        border-left: 1px solid var(--gray-4);
                     }
 
                     .sign-in__image {
@@ -162,12 +162,23 @@ const SignIn: React.FC<Props> = ({ providers }) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const session = await getSession(context)
     const providers = await getProviders()
 
-    return {
-        props: {
-            providers,
+    if (session) {
+        context.res.setHeader('location', '/');
+        context.res.statusCode = 302;
+        return {
+            props: {
+                providers: []
+            }
+        }
+    } else {
+        return {
+            props: {
+                providers,
+            }
         }
     }
 }
