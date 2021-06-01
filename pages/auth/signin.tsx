@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { getProviders, signIn, useSession, getSession } from 'next-auth/client'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { getProviders, signIn, useSession, getSession } from 'next-auth/client'
 import { useAppDispatch } from '../../store/hooks'
 import { showPageLoader, hidePageLoader } from '../../store/slices/rootSlice'
 
@@ -30,6 +31,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
 
     const handleSignIn = (id: string) => {
         dispatch(showPageLoader())
+        setTimeout(() => dispatch(hidePageLoader()), 1500)
         signIn(id)
     }
 
@@ -45,7 +47,6 @@ const SignIn: React.FC<Props> = ({ providers }) => {
             document.addEventListener('keydown', documentHandleKeyPress)
         }
         return () => {
-            dispatch(hidePageLoader())
             document.removeEventListener('keydown', documentHandleKeyPress)
         }
     }, [session])
@@ -60,9 +61,15 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                     <div
                         className="sign-in__hello"
                     >
-                        <h1>Welcom to a Laveha</h1>
-                        <p>Budget planning and cost accounting</p>
+                        <h1 className="title">Budget planner</h1>
                     </div>
+                    <Image
+                        src="/index.jpg"
+                        alt="Budget planner"
+                        layout="fill"
+                        objectFit="cover"
+                        quality={100}
+                    />
                 </div>
                 <div className="sign-in__section sign-in__section_providers">
                     <div
@@ -126,10 +133,19 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                     }
 
                     .sign-in__hello {
+                        position: relative;
                         padding: 30px;
+                        max-width: 400px;
+                        z-index: 2;
+                    }
+
+                    .title {
+                        display: inline-block;
+                        background-color: #fff;
                     }
 
                     .sign-in__section {
+                        position: relative;
                         height: 100%;
                     }
 

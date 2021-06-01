@@ -11,9 +11,15 @@ const Index = () => (
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
             <link rel="manifest" href="/favicon/site.webmanifest"/>
         </Head>
-        <div>
+        <div className="index">
             <RouteLoader/>
         </div>
+        <style jsx>{`
+            .index {
+                position: relative;
+                height: 100%;
+            }
+        `}</style>
     </>
 )
 
