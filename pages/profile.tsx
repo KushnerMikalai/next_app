@@ -9,7 +9,6 @@ interface Props {
 }
 
 const Profile: NextPage<Props> = ({ user }) => {
-
     return (
         <>
             <Head>
@@ -18,7 +17,9 @@ const Profile: NextPage<Props> = ({ user }) => {
             <h1>Profile</h1>
             <ul>
                 <li><b>Name:</b>{ user?.name }</li>
-                <li><b>Email:</b>{ user?.email }</li>
+                {user?.email &&
+                    <li><b>Email:</b>{ user?.email }</li>
+                }
             </ul>
         </>
     )

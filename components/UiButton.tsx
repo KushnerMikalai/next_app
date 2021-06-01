@@ -39,7 +39,7 @@ const UiButton: React.FC<Props> = ({ iconCustom, icon, children, width, minWidth
                     min-width: ${minWidth || 'initial'};
                     font-size: .8rem;
                     text-transform: uppercase;
-                    color: #000;
+                    color: var(--text);
                     padding: .5rem 1.2rem;
                     border: 1px solid var(--gray-6);
                     border-radius: .3rem;

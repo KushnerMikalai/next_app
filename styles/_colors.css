@@ -1,4 +1,6 @@
 :root {
+    --text: #3F3356;
+
     --gray-4: #f0f0f0;
     --gray-5: #d9d9d9;
     --gray-6: #bfbfbf;
@@ -15,4 +17,3 @@
     --primary-5: #e65343;
     --primary-6: #da291c;
   }
-

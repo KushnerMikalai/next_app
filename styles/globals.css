@@ -20,7 +20,7 @@ body * {
 } */
 
 body {
-  color: #3F3356;
+  color: var(--text);
 }
 
 body > div {

@@ -51,7 +51,7 @@ export default function Layout({children}: LayoutProps) {
                     height: 52px;
                     padding-left: 20px;
                     padding-right: 20px;
-                    background-color: #FFF;
+                    background-color: #fff;
                     border-bottom: 1px solid var(--gray-4);
                 }
 

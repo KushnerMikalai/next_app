@@ -3,6 +3,8 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { getProviders, signIn, useSession, getSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import { useAppDispatch } from '../../store/hooks'
+import { showPageLoader, hidePageLoader } from '../../store/slices/rootSlice'
 
 import UiButton from '../../components/UiButton'
 
@@ -18,11 +20,17 @@ interface Props {
 const SignIn: React.FC<Props> = ({ providers }) => {
     const router = useRouter()
     const [session] = useSession();
+    const dispatch = useAppDispatch()
 
     const documentHandleKeyPress = (e: any) => {
         if (e.key === 'Escape') {
             router.push('/')
         }
+    }
+
+    const handleSignIn = (id: string) => {
+        dispatch(showPageLoader())
+        signIn(id)
     }
 
     const handleClosePage = () => {
@@ -37,6 +45,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
             document.addEventListener('keydown', documentHandleKeyPress)
         }
         return () => {
+            dispatch(hidePageLoader())
             document.removeEventListener('keydown', documentHandleKeyPress)
         }
     }, [session])
@@ -74,7 +83,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                                 <UiButton
                                     iconCustom={`/icons/icon-${provider.name.toLowerCase()}.svg`}
                                     minWidth="120px"
-                                    onClick={() => signIn(provider.id)}
+                                    onClick={() => handleSignIn(provider.id)}
                                 >
                                     {provider.name}
                                 </UiButton>
@@ -110,7 +119,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                         left: 0;
                         width: 100%;
                         height: 100%;
-                        z-index: 10;
+                        z-index: 9;
                         background-color: #fff;
                         display: grid;
                         grid-template-columns: 1fr 1fr;

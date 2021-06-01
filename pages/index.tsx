@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import RouteLoader from '../components/RouteLoader'
 
 const Index = () => (
     <>
@@ -9,11 +10,9 @@ const Index = () => (
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
             <link rel="manifest" href="/favicon/site.webmanifest"/>
-            <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ffffff"/>
-            <meta name="msapplication-TileColor" content="#da532c"/>
-            <meta name="theme-color" content="#ffffff"></meta>
         </Head>
         <div>
+            <RouteLoader/>
         </div>
     </>
 )
