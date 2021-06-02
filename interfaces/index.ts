@@ -10,3 +10,8 @@ export interface TaskType {
     age: number,
     poddy_trained: boolean,
 }
+
+export interface UserType {
+    name: string
+    email?: string
+}

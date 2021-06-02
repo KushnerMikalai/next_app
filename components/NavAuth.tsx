@@ -2,17 +2,20 @@ import React, { MouseEvent } from 'react'
 import { signOut, useSession } from 'next-auth/client'
 import Link from 'next/link'
 import UiButton from '../components/UiButton'
-
-async function handleSignOut(e: MouseEvent) {
-    e.preventDefault()
-    await signOut()
-}
+import { useRouter } from 'next/router'
 
 function NavAuth() {
     const [session] = useSession()
+    const router = useRouter()
 
     const userName = session && session.user ? session.user.email || session.user.name : ''
     const userShortName = userName ? `${userName[0]}${userName[1]}` : ''
+
+    async function handleSignOut(e: MouseEvent) {
+        e.preventDefault()
+        router.push('/')
+        await signOut()
+    }
 
     return (
         <>

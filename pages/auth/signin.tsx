@@ -61,7 +61,7 @@ const SignIn: React.FC<Props> = ({ providers }) => {
                     <div
                         className="sign-in__hello"
                     >
-                        <h1 className="title">Budget planner</h1>
+                        <h1 className="title t-selection">Budget planner</h1>
                     </div>
                     <Image
                         src="/index.jpg"

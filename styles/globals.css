@@ -37,3 +37,8 @@ a {
 *::after {
   box-sizing: border-box;
 }
+
+.t-selected::selection {
+    background-color: var(--red);
+    color: #fff;
+}

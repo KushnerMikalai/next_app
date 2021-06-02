@@ -3,12 +3,18 @@ import { getSession } from 'next-auth/client'
 import { GetServerSideProps } from 'next'
 import { NextPage } from 'next'
 import Head from 'next/head'
+import { UserType } from '../interfaces'
+import Error, { ErrorType } from '../components/Error'
 
-interface Props {
-    user: any
+interface Props extends ErrorType {
+    user: UserType
 }
 
-const Profile: NextPage<Props> = ({ user }) => {
+const Profile: NextPage<Props> = ({ user, errorCode }) => {
+    if (errorCode) {
+        return <Error errorCode={errorCode}/>
+    }
+
     return (
         <>
             <Head>
@@ -34,10 +40,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             }
         }
     } else {
-        context.res.setHeader('location', '/auth/signin');
-        context.res.statusCode = 302;
-        context.res.end();
-        return {props: {}}
+        return {
+            props: {
+                errorCode: 401
+            }
+        }
     }
 }
 
