@@ -8,9 +8,6 @@ function NavAuth() {
     const [session] = useSession()
     const router = useRouter()
 
-    const userName = session && session.user ? session.user.email || session.user.name : ''
-    const userShortName = userName ? `${userName[0]}${userName[1]}` : ''
-
     async function handleSignOut(e: MouseEvent) {
         e.preventDefault()
         router.push('/')
@@ -34,21 +31,13 @@ function NavAuth() {
                 {session?.user && (
                     <div className="nav-user">
                         <div className="nav-user__content">
-                            {session.user.image ?
-                                <Link href="/profile">
-                                    <a className="nav-user__avatar">
-                                        <img
-                                            className="nav-user__avatar-img"
-                                            src={session.user.image}
-                                            alt={userShortName}
-                                        />
-                                    </a>
-                                </Link>
-                                :
-                                <div className="nav-user__avatar nav-user__avatar_no-image">
-                                    <span>{userShortName}</span>
-                                </div>
-                            }
+                            <Link href="/profile">
+                                <a className="nav-user__avatar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="nav-user__avatar-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </a>
+                            </Link>
                         </div>
                         <UiButton
                             onClick={(e) => handleSignOut(e)}
@@ -88,26 +77,23 @@ function NavAuth() {
                 }
 
                 .nav-user__avatar {
-                    display: inline-block;
                     border-radius: 50%;
                     overflow: hidden;
-                    width: 34px;
-                    height: 34px;
-                }
-
-                .nav-user__avatar_no-image {
-                    padding: 0;
-                    border: 1px solid #000;
+                    width: 36px;
+                    height: 36px;
+                    border: 1px solid var(--gray-6);
                     text-transform: uppercase;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                 }
 
-                .nav-user__avatar-img {
-                    object-fit: cover;
-                    width: 100%;
-                    height: 100%;
+                .nav-user__avatar:hover {
+                    border: 1px solid var(--red);
+                }
+
+                .nav-user__avatar-icon {
+                    width: 16px;
                 }
             `}</style>
         </>

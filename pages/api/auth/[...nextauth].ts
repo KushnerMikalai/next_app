@@ -1,5 +1,8 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
+import dbConnect from '../../../utils/dbConnect'
+import User from '../../../models/User'
+import Category from '../../../models/Category'
 
 export default NextAuth({
     providers: [
@@ -22,7 +25,22 @@ export default NextAuth({
         signIn: '/auth/signin',
         error: '/auth/error'
     },
-    callbacks: {},
-    events: {},
+    callbacks: {
+        // async signIn(token, user, account) {},
+        // async jwt(token, user, account, profile, isNewUser) {}
+    },
+    events: {
+        async createUser(user) {
+            await dbConnect()
+            const userFromDB = await User.findById(user.id)
+            const userId = userFromDB._id
+            await Category.insertMany([
+                {userId, name: 'home'},
+                {userId, name: 'car'},
+                {userId, name: 'food'},
+                {userId, name: 'medicines'},
+            ])
+        }
+    },
     debug: false
 })
