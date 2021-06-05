@@ -1,3 +1,6 @@
+import Link from 'next/link'
+import UiButton from '../components/UiButton'
+
 export interface ErrorType {
     errorCode: number
     errorTitle?: string
@@ -20,6 +23,18 @@ const Error = ({ errorCode, errorTitle = ''}: ErrorType) => {
                 <h1>{errorCode}</h1>
                 <div className="e-title">
                     <h2>{errorTitle ? errorTitle : statusText(errorCode)}</h2>
+
+                </div>
+                <div className="error__home">
+                    <Link href="/">
+                        <a>
+                            <UiButton
+                                icon={'M17 8l4 4m0 0l-4 4m4-4H3'}
+                            >
+                                home
+                            </UiButton>
+                        </a>
+                    </Link>
                 </div>
             </div>
             <style jsx>{`
@@ -30,6 +45,10 @@ const Error = ({ errorCode, errorTitle = ''}: ErrorType) => {
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
+                }
+                .error__home {
+                    margin-top: 1rem;
+                    width: 100%;
                 }
                 h1 {
                     display: inline-block;

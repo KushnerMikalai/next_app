@@ -40,7 +40,7 @@ export default NextAuth({
                 {userId, name: 'food'},
                 {userId, name: 'medicines'},
             ])
-        }
+        },
     },
     debug: false
 })

@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import getConfig from 'next/config'
-
 const { publicRuntimeConfig } = getConfig()
 const { NEXTAUTH_URL } = publicRuntimeConfig
 

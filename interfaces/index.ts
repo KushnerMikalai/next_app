@@ -15,3 +15,8 @@ export interface UserType {
     name: string
     email?: string
 }
+
+export interface Provider {
+    name: string
+    id: string
+}

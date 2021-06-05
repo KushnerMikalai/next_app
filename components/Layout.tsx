@@ -9,26 +9,34 @@ import Footer from './Footer'
 
 interface LayoutProps {
     children: React.ReactNode
+    session: any
 }
 
-export default function Layout({children}: LayoutProps) {
+export default function Layout({children, session}: LayoutProps) {
     const pageLoader = useAppSelector(selectPageLoader)
 
     return (
         <div className="layout">
             {pageLoader && <PageLoader />}
-            <header className="header">
-                <Link href="/">
-                    <a
-                        className="logo"
-                        data-category="Site-Wide Custom Events"
-                        data-label="Site logo"
-                    >
-                        <img src="/logo_laveha.svg" alt="Laveha" />
-                    </a>
-                </Link>
-                <Nav/>
-            </header>
+            {session &&
+                <header className="header">
+                    <Link href="/">
+                        <a
+                            className="logo"
+                            data-category="Site-Wide Custom Events"
+                            data-label="Site logo"
+                        >
+                            <img
+                                src="/logo_laveha.svg"
+                                alt="Laveha"
+                                width="72px"
+                                height="17px"
+                            />
+                        </a>
+                    </Link>
+                    <Nav/>
+                </header>
+            }
             <main className="content">
                 {children}
             </main>

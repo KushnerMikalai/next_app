@@ -3,7 +3,7 @@ import '../styles/_colors.css'
 
 import { Provider as ProviderAuth } from 'next-auth/client'
 import App, { AppProps, AppContext } from 'next/app'
-
+import { getSession } from 'next-auth/client'
 import { wrapper } from '../store'
 import Layout from '../components/Layout'
 
@@ -11,9 +11,10 @@ interface MyAppProps extends AppProps {}
 
 class WrappedApp extends App<MyAppProps> {
     static async getInitialProps({ Component, ctx }: AppContext) {
+        const session = await getSession(ctx)
         const pageProps = Component.getInitialProps
             ? await Component.getInitialProps(ctx)
-            : {}
+            : {session}
 
         return { pageProps }
     }
@@ -29,7 +30,7 @@ class WrappedApp extends App<MyAppProps> {
                 }}
                 session={pageProps.session}
             >
-                <Layout>
+                <Layout session={pageProps.session}>
                     <Component {...pageProps} />
                 </Layout>
             </ProviderAuth>

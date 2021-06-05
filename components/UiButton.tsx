@@ -37,19 +37,21 @@ const UiButton: React.FC<Props> = ({ iconCustom, icon, children, width, minWidth
                     display: inline-block;
                     width: ${width || 'initial'};
                     min-width: ${minWidth || 'initial'};
-                    font-size: .8rem;
-                    text-transform: uppercase;
+                    font-size: 14px;
                     color: var(--text);
                     padding: .5rem 1.2rem;
                     border: 1px solid var(--gray-6);
                     border-radius: .3rem;
-                    transition: all 100ms ease;
+                    transition: all .1s cubic-bezier(.645,.045,.355,1);
                     cursor: pointer;
                     background-color: initial;
+                    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+                    white-space: nowrap;
                 }
 
                 .ui-button:hover {
                     border: 1px solid var(--primary-6);
+                    color: var(--primary-6);
                 }
 
                 .ui-button:active {
