@@ -18,14 +18,12 @@ const Profile: NextPage<Props> = ({ user, errorCode }) => {
     return (
         <>
             <Head>
-                <title>Laveha: Profile</title>
+                <title>Profile</title>
             </Head>
             <h1>Profile</h1>
             <ul>
                 <li><b>Name:</b>{ user?.name }</li>
-                {user?.email &&
-                    <li><b>Email:</b>{ user?.email }</li>
-                }
+                {user?.email && <li><b>Email:</b>{ user?.email }</li>}
             </ul>
         </>
     )

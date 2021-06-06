@@ -7,6 +7,7 @@ module.exports = {
         webpack5: true,
     },
     publicRuntimeConfig: {
-        NEXTAUTH_URL: process.env.NEXTAUTH_URL
+        NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+        APP_NAME: process.env.APP_NAME
     },
 }

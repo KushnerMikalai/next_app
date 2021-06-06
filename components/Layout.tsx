@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { useAppSelector } from '../store/hooks'
 import { selectPageLoader } from '../store/slices/rootSlice'
+import getConfig from 'next/config'
 
 import Nav from './Nav'
 import PageLoader from './PageLoader'
@@ -14,6 +15,8 @@ interface LayoutProps {
 
 export default function Layout({children, session}: LayoutProps) {
     const pageLoader = useAppSelector(selectPageLoader)
+    const { publicRuntimeConfig } = getConfig()
+    const { APP_NAME } = publicRuntimeConfig
 
     return (
         <div className="layout">
@@ -26,12 +29,7 @@ export default function Layout({children, session}: LayoutProps) {
                             data-category="Site-Wide Custom Events"
                             data-label="Site logo"
                         >
-                            <img
-                                src="/logo_laveha.svg"
-                                alt="Laveha"
-                                width="72px"
-                                height="17px"
-                            />
+                            {APP_NAME}
                         </a>
                     </Link>
                     <Nav/>
@@ -72,7 +70,9 @@ export default function Layout({children, session}: LayoutProps) {
                 .logo {
                     margin-right: 1rem;
                     display: inline-block;
-                    font-size: 0;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    font-weight: 600;
                 }
                 .logo img {
                     width: 72px;

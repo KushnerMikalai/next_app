@@ -15,7 +15,7 @@ const Dashboard: NextPage<Props> = ({ user, errorCode }) => {
     }
     return <>
         <Head>
-            <title>Laveha: Dashboard</title>
+            <title>Dashboard</title>
         </Head>
         <div className="index">
             <h1>Dashboard</h1>

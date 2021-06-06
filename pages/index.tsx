@@ -6,10 +6,7 @@ import { getProviders, signIn, getSession } from 'next-auth/client'
 import { useAppDispatch } from '../store/hooks'
 import { showPageLoader, hidePageLoader } from '../store/slices/rootSlice'
 import AuthProviderList from '../components/AuthProviderList'
-
 import getConfig from 'next/config'
-const { publicRuntimeConfig } = getConfig()
-const { NEXTAUTH_URL } = publicRuntimeConfig
 
 interface Provider {
     name: string
@@ -23,6 +20,8 @@ interface Props {
 
 const Index: React.FC<Props> = ({ providers }) => {
     const dispatch = useAppDispatch()
+    const { publicRuntimeConfig } = getConfig()
+    const { NEXTAUTH_URL, APP_NAME } = publicRuntimeConfig
 
     const handleSignIn = (id: string) => {
         dispatch(showPageLoader())
@@ -35,16 +34,19 @@ const Index: React.FC<Props> = ({ providers }) => {
     return (
         <>
             <Head>
-                <title>Laveha</title>
+                <title>{APP_NAME} - Budget planner</title>
                 <meta name="description" content="Automate your budget"/>
                 <meta name="author" content="niko" />
                 <meta name="theme-color" content="#DA291C"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta property="og:image" content="https://next-test-js.vercel.app/index.jpg"/>
+
                 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
                 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
                 <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
-                <link rel="manifest" href="/favicon/site.webmanifest"/>
+                <link rel="manifest" href="/favicon/site.webmanifest"></link>
+                <meta name="msapplication-TileColor" content="#ffffff"/>
+                <meta name="theme-color" content="#ffffff"></meta>
             </Head>
             <div className="index">
                 <RouteLoader/>
@@ -118,11 +120,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const providers = await getProviders()
 
     if (session) {
-        context.res.setHeader('location', '/dashboard');
-        context.res.statusCode = 302;
         return {
-            props: {
-                providers: []
+            redirect: {
+                permanent: false,
+                destination: '/dashboard'
             }
         }
     } else {

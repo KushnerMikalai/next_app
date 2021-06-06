@@ -1,4 +1,4 @@
-# Laveha
-### budget planning and cost accounting
+# Groshik.online
+### Budget planning
 
-- [Site](https://next-test-js.vercel.app/)
+- [Site](https://www.groshik.online/)
