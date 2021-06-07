@@ -11,10 +11,12 @@ stylesheet.setConfig({
 });
 
 export default class MyDocument extends Document {
+    // @ts-ignore
     static getInitialProps({ renderPage }) {
         stylesheet.reset();
         resetIds();
 
+        // @ts-ignore
         const page = renderPage(App => props => <App {...props} />);
         return { ...page, styleTags: stylesheet.getRules(true) };
     }
@@ -26,6 +28,7 @@ export default class MyDocument extends Document {
                     <style
                         id="fabric-style"
                         type="text/css"
+                        // @ts-ignore
                         dangerouslySetInnerHTML={{ __html: this.props.styleTags }}
                     />
                 </Head>
