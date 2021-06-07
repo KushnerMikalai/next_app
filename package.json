@@ -17,7 +17,10 @@
     "semi": false
   },
   "dependencies": {
+    "@fluentui/merge-styles": "^8.1.2",
+    "@fluentui/react": "^8.17.0",
     "@reduxjs/toolkit": "^1.5.1",
+    "modern-normalize": "^1.1.0",
     "next": "^10.2.0",
     "next-auth": "^3.23.3",
     "next-redux-wrapper": "^6.0.2",

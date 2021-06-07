@@ -1,7 +1,9 @@
 import React, { MouseEvent } from 'react'
 import { signOut, useSession } from 'next-auth/client'
 import Link from 'next/link'
-import UiButton from '../components/UiButton'
+
+import UiButtonPrimary from './ui/UiButtonPrimary'
+import UiButtonIcon from './ui/UiButtonIcon'
 
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
@@ -22,19 +24,17 @@ function NavAuth() {
                     <div className="nav-user">
                         <div className="nav-user__content">
                             <Link href="/profile">
-                                <a className="nav-user__avatar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="nav-user__avatar-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </a>
+                                <UiButtonIcon
+                                    iconName={'FollowUser'}
+                                />
                             </Link>
                         </div>
-                        <UiButton
-                            onClick={(e) => handleSignOut(e)}
-                            icon={'M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'}
-                        >
-                            Sign out
-                        </UiButton>
+
+                        <UiButtonPrimary
+                            text={'Sign out'}
+                            iconName={'SignOut'}
+                            onClick={handleSignOut}
+                        />
                     </div>
                 )}
             </div>

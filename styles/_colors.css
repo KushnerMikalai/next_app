@@ -1,5 +1,5 @@
 :root {
-    --text: #3F3356;
+    --text: #323130;
 
     --gray-4: #f0f0f0;
     --gray-5: #d9d9d9;
@@ -15,5 +15,6 @@
 
     --primary-1: #fff1ed;
     --primary-5: #e65343;
-    --primary-6: #da291c;
+    --themePrimary: #da291c;
+    --themeDarker: #791710;
 }

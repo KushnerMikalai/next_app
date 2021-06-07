@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap');
-
 :root {
-    --primaryFontFamily: 'Manrope', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    --primaryFontFamily: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif
 }
 
 html,
@@ -30,12 +27,6 @@ body > div {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 
 .t-selected::selection {

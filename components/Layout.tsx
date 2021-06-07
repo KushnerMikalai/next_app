@@ -3,6 +3,7 @@ import React from 'react'
 import { useAppSelector } from '../store/hooks'
 import { selectPageLoader } from '../store/slices/rootSlice'
 import getConfig from 'next/config'
+// import { createTheme, ThemeProvider } from '@fluentui/react';
 
 import Nav from './Nav'
 import PageLoader from './PageLoader'
@@ -18,7 +19,34 @@ export default function Layout({children, session}: LayoutProps) {
     const { publicRuntimeConfig } = getConfig()
     const { APP_NAME } = publicRuntimeConfig
 
+    // const appTheme = createTheme({
+    //     palette: {
+    //       themePrimary: '#da291c',
+    //       themeLighterAlt: '#fdf5f5',
+    //       themeLighter: '#f9d9d6',
+    //       themeLight: '#f4b8b4',
+    //       themeTertiary: '#e8776f',
+    //       themeSecondary: '#dd3f34',
+    //       themeDarkAlt: '#c32519',
+    //       themeDark: '#a51f15',
+    //       themeDarker: '#791710',
+    //       neutralLighterAlt: '#faf9f8',
+    //       neutralLighter: '#f3f2f1',
+    //       neutralLight: '#edebe9',
+    //       neutralQuaternaryAlt: '#e1dfdd',
+    //       neutralQuaternary: '#d0d0d0',
+    //       neutralTertiaryAlt: '#c8c6c4',
+    //       neutralTertiary: '#a19f9d',
+    //       neutralSecondary: '#605e5c',
+    //       neutralPrimaryAlt: '#3b3a39',
+    //       neutralPrimary: '#323130',
+    //       neutralDark: '#201f1e',
+    //       black: '#000000',
+    //       white: '#ffffff',
+    // }})
+
     return (
+        // <ThemeProvider applyTo='body' theme={appTheme}>
         <div className="layout">
             {pageLoader && <PageLoader />}
             {session &&
@@ -79,5 +107,6 @@ export default function Layout({children, session}: LayoutProps) {
                 }
             `}</style>
         </div>
+        // </ThemeProvider>
     )
 }
