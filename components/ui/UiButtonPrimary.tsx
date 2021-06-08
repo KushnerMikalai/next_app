@@ -1,24 +1,21 @@
 import * as React from 'react'
-import { IIconProps, PrimaryButton } from '@fluentui/react'
 
-export interface IButtonPrimayProps {
+export interface UiButtonPrimayProps {
     disabled?: boolean
-    iconName?: string
     text?: string
     onClick?: any
 }
 
-const UiButtonPrimary: React.FunctionComponent<IButtonPrimayProps> = props => {
-    const { disabled, iconName, text, onClick } = props
-    const Icon: IIconProps = { iconName }
+const UiButtonPrimary: React.FunctionComponent<UiButtonPrimayProps> = props => {
+    const { disabled, text, onClick } = props
 
     return (
-        <PrimaryButton
-            iconProps={Icon}
+        <button
             disabled={disabled}
-            text={text}
             onClick={onClick}
-        />
+        >
+            {text}
+        </button>
     )
 }
 

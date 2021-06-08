@@ -23,7 +23,7 @@ export default function Layout({children, session}: LayoutProps) {
             {pageLoader && <PageLoader />}
             {session &&
                 <header className={styles.header}>
-                    <Link href="/">
+                    <Link href="/dashboard">
                         <a
                             className={styles.logo}
                             data-category="Site-Wide Custom Events"

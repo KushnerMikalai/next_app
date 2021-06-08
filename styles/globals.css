@@ -1,13 +1,8 @@
-:root {
-    --primaryFontFamily: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif
-}
-
 html,
 body {
     height: 100%;
     padding: 0;
     margin: 0;
-    font-family: var(--primaryFontFamily);
 }
 
 .bar-of-progress {

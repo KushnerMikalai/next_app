@@ -1,27 +1,13 @@
 import * as React from 'react'
-import { Spinner, SpinnerSize } from '@fluentui/react'
+import { Loader } from 'react-feather'
+import styles from '../styles/PageLoader.module.css'
 
 const PageLoader: React.FunctionComponent = () => {
     return (
         <>
-            <div className="loader">
-                <Spinner size={SpinnerSize.large} />
+            <div className={styles.loader}>
+                <Loader size={48} className={styles.loaderIcon} />
             </div>
-            <style jsx>{`
-                .loader {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 10;
-                    background-color: rgba(255,255,255, 0.7);
-                    cursor: wait;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-            `}</style>
         </>
     )
 }

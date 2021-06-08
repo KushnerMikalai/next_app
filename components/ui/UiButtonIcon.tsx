@@ -1,22 +1,22 @@
 import * as React from 'react'
-import { IIconProps, IconButton } from '@fluentui/react'
 
-export interface IButtonPrimayProps {
+export interface UiButtonIconProps {
     disabled?: boolean
     iconName?: string
     onClick?: any
+    children: React.ReactNode
 }
 
-const UiButtonIcon: React.FunctionComponent<IButtonPrimayProps> = props => {
-    const { disabled, iconName, onClick } = props
-    const Icon: IIconProps = { iconName }
+const UiButtonIcon: React.FunctionComponent<UiButtonIconProps> = props => {
+    const { disabled, onClick, children } = props
 
     return (
-        <IconButton
-            iconProps={Icon}
+        <button
             disabled={disabled}
             onClick={onClick}
-        />
+        >
+            <span>{children}</span>
+        </button>
     )
 }
 

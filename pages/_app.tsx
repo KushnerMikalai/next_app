@@ -1,7 +1,6 @@
 import 'modern-normalize'
 import '../styles/_colors.css'
 import '../styles/globals.css'
-import { initializeIcons } from '@fluentui/react'
 import { Provider as ProviderAuth } from 'next-auth/client'
 import App, { AppProps, AppContext } from 'next/app'
 import Router from 'next/router'
@@ -11,14 +10,13 @@ import Layout from '../components/Layout'
 import ProgressBar from '@badrap/bar-of-progress'
 
 interface MyAppProps extends AppProps {}
-initializeIcons()
+
 const progress = new ProgressBar({
     size: 3,
     color: '#0078d4',
     className: 'bar-of-progress',
     delay: 100,
 })
-
 Router.events.on('routeChangeStart', progress.start);
 Router.events.on('routeChangeComplete', progress.finish);
 Router.events.on('routeChangeError', progress.finish);
@@ -35,6 +33,7 @@ class WrappedApp extends App<MyAppProps> {
 
     render() {
         const { Component, pageProps } = this.props
+
         return (
             <ProviderAuth
                 options={{

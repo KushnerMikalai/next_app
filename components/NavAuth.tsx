@@ -26,14 +26,14 @@ function NavAuth() {
                             <Link href="/profile">
                                 <span>
                                     <UiButtonIcon
-                                        iconName={'FollowUser'}
-                                    />
+                                    >
+                                        <span>user</span>
+                                    </UiButtonIcon>
                                 </span>
                             </Link>
                         </div>
                         <UiButtonPrimary
                             text={'Sign out'}
-                            iconName={'SignOut'}
                             onClick={handleSignOut}
                         />
                     </div>

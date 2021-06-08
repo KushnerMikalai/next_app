@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next'
 import { NextPage } from 'next'
 import { UserType } from '../interfaces'
 import Error, { ErrorType } from '../components/Error'
-
 interface Props extends ErrorType {
     user: UserType
 }
