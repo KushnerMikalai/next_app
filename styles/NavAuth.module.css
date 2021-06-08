@@ -1,0 +1,14 @@
+.auth {
+    margin-left: auto;
+}
+
+.navUser {
+    display: flex;
+    align-items: center;
+}
+
+.navUserContent {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}

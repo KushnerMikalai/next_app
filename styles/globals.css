@@ -10,11 +10,9 @@ body {
     font-family: var(--primaryFontFamily);
 }
 
-/* is use Cursore componenet */
-/* html *,
-body * {
-    cursor: none;
-} */
+.bar-of-progress {
+    z-index: 50;
+}
 
 body {
   color: var(--text);

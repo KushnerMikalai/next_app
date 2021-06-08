@@ -1,7 +1,6 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import RouteLoader from '../components/RouteLoader'
 import { getProviders, signIn, getSession } from 'next-auth/client'
 import { useAppDispatch } from '../store/hooks'
 import { showPageLoader, hidePageLoader } from '../store/slices/rootSlice'
@@ -26,8 +25,6 @@ const Index: React.FC<Props> = ({ providers }) => {
     const handleSignIn = (id: string) => {
         dispatch(showPageLoader())
         setTimeout(() => dispatch(hidePageLoader()), 1500)
-        console.log(`${NEXTAUTH_URL}/dashboard`);
-
         signIn(id, { callbackUrl: `${NEXTAUTH_URL}/dashboard` })
     }
 
@@ -49,7 +46,6 @@ const Index: React.FC<Props> = ({ providers }) => {
                 <meta name="theme-color" content="#ffffff"></meta>
             </Head>
             <div className="index">
-                <RouteLoader/>
                 <div className="header">
                     <div className="header__row">
                         <div className="header__col">
