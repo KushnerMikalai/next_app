@@ -1,0 +1,33 @@
+.layout {
+    display: grid;
+    grid-template-areas: "header" "content" "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+}
+
+.header {
+    grid-area: header;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 52px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid var(--gray-4);
+}
+
+.content {
+    grid-area: content;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.logo {
+    margin-right: 1rem;
+    display: inline-block;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+}

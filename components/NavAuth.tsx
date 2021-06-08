@@ -24,9 +24,11 @@ function NavAuth() {
                     <div className="nav-user">
                         <div className="nav-user__content">
                             <Link href="/profile">
-                                <UiButtonIcon
-                                    iconName={'FollowUser'}
-                                />
+                                <span>
+                                    <UiButtonIcon
+                                        iconName={'FollowUser'}
+                                    />
+                                </span>
                             </Link>
                         </div>
 
