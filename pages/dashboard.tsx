@@ -8,7 +8,7 @@ interface Props extends ErrorType {
     user: UserType
 }
 
-const Dashboard: NextPage<Props> = ({ user, errorCode }) => {
+const Dashboard: NextPage<Props> = ({ errorCode }) => {
     if (errorCode) {
         return <Error errorCode={errorCode} />
     }
@@ -18,7 +18,6 @@ const Dashboard: NextPage<Props> = ({ user, errorCode }) => {
         </Head>
         <div className="index">
             <h1>Dashboard</h1>
-            {JSON.stringify(user)}
         </div>
     </>
 }

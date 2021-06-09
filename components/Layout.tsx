@@ -38,7 +38,7 @@ export default function Layout({children, session}: LayoutProps) {
             <main className={styles.content}>
                 {children}
             </main>
-            <Footer/>
+            {session && <Footer/>}
         </div>
     )
 }

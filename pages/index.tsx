@@ -7,6 +7,9 @@ import { showPageLoader, hidePageLoader } from '../store/slices/rootSlice'
 import AuthProviderList from '../components/AuthProviderList'
 import getConfig from 'next/config'
 
+import styles from '../styles/components/IndexHeader.module.css'
+import textStyles from '../styles/Text.module.css'
+
 interface Provider {
     name: string
     id: string
@@ -45,68 +48,23 @@ const Index: React.FC<Props> = ({ providers }) => {
                 <meta name="msapplication-TileColor" content="#ffffff"/>
                 <meta name="theme-color" content="#ffffff"></meta>
             </Head>
-            <div className="index">
-                <div className="header">
-                    <div className="header__row">
-                        <div className="header__col">
-                            <h1 className="t-selection">Budget planner</h1>
-                            <h2 className="t-selection">Automate your budget</h2>
-                        </div>
-                        <div className="header__col header__col_auth">
-                            <div className="login">
-                                <span className="label">Sign in with:</span>
-                                <AuthProviderList
-                                    providers={providers}
-                                    signIn={handleSignIn}
-                                    justifyContent={'center'}
-                                />
-                            </div>
+            <div className={styles.index}>
+                <div className={styles.header}>
+                    <div className={styles.content}>
+                        <div className={styles.login}>
+                            <h1 className={`${textStyles.selected} ${styles.title}`}>Budget planner</h1>
+                            <h2 className={textStyles.selected}>Our free Budget Planner puts you in control of your household spending and analyses your results to help you take control of your money</h2>
+                            <i className={styles.line}></i>
+                            <span className={styles.label}>Sign in with:</span>
+                            <AuthProviderList
+                                providers={providers}
+                                signIn={handleSignIn}
+                                justifyContent={'center'}
+                            />
                         </div>
                     </div>
                 </div>
             </div>
-            <style jsx>{`
-                .index {
-                    position: relative;
-                    height: 100%;
-                }
-
-                .label {
-                    display: inline-block;
-                    margin-bottom: 10px;
-                    margin-top: 0;
-                    font-size: 20px;
-                    font-weight: 600;
-                    font-family: var(--primaryFontFamily);
-                }
-
-                .header {
-                    height: 100%;
-                }
-
-                .header__row {
-                    display: flex;
-                    height: 100%;
-                }
-
-                .header__col {
-                    width: 50%;
-                }
-
-                .header__col_auth {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                .login {
-                    text-align: center;
-                    padding: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
-                    border: 1px solid var(--gray-6);
-                }
-            `}</style>
         </>
     )
 }

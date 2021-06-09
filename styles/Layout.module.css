@@ -20,8 +20,6 @@
 
 .content {
     grid-area: content;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .logo {

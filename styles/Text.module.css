@@ -1,0 +1,4 @@
+.selected::selection {
+    background-color: var(--red);
+    color: #fff;
+}

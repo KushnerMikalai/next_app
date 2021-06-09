@@ -21,8 +21,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-.t-selected::selection {
-    background-color: var(--red);
-    color: #fff;
-}

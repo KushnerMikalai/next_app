@@ -1,5 +1,5 @@
 import React from 'react'
-import UiButton from '../components/UiButton'
+import UiButton from '../components/ui/UiButton'
 
 interface Provider {
     name: string
@@ -22,11 +22,9 @@ const AuthProviderList: React.FC<Props> = ({ providers, signIn, justifyContent }
                 >
                     <UiButton
                         iconCustom={`/icons/icon-${provider.name.toLowerCase()}.svg`}
-                        minWidth="120px"
+                        text={provider.name}
                         onClick={() => signIn(provider.id)}
-                    >
-                        {provider.name}
-                    </UiButton>
+                    ></UiButton>
                 </div>
             ))}
 
