@@ -1,20 +1,19 @@
-function Footer() {
+import getConfig from 'next/config'
+import styles from '../styles/components/Footer.module.css'
+
+export interface Footer {}
+
+const Footer: React.FunctionComponent<Footer> = () => {
+    const { publicRuntimeConfig } = getConfig()
+    const { APP_NAME } = publicRuntimeConfig
+    const copyright = {__html: `${APP_NAME} &copy; ${new Date().getFullYear()}`}
+
     return (
-        <footer className="footer">
-            <div className="copyright">Laveha &copy; {new Date().getFullYear()}</div>
-            <style jsx>{`
-                .copyright {
-                    font-size: 11px;
-                    color: #737373;
-                    cursor: default;
-                }
-                .footer {
-                    padding: 10px 20px;
-                    grid-area: footer;
-                    width: 100%;
-                    border-top: 1px solid var(--gray-4);
-                }
-            `}</style>
+        <footer className={styles.footer}>
+            <div
+                className={styles.copyright}
+                dangerouslySetInnerHTML={copyright}
+            ></div>
         </footer>
     )
 }

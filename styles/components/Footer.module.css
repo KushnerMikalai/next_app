@@ -1,0 +1,11 @@
+.copyright {
+    font-size: 11px;
+    cursor: default;
+}
+
+.footer {
+    padding: 10px 20px;
+    grid-area: footer;
+    width: 100%;
+    border-top: 1px solid var(--themePrimary);
+}

@@ -1,0 +1,8 @@
+.providerButton:not(:last-child) {
+    margin-right: 10px;
+}
+
+.providerList {
+    display: flex;
+    justify-content: center;
+}

@@ -20,15 +20,15 @@ interface Props {
     session: any
 }
 
-const Index: React.FC<Props> = ({ providers }) => {
+const Index: React.FC<Props> = ({providers}) => {
     const dispatch = useAppDispatch()
-    const { publicRuntimeConfig } = getConfig()
-    const { NEXTAUTH_URL, APP_NAME } = publicRuntimeConfig
+    const {publicRuntimeConfig} = getConfig()
+    const {NEXTAUTH_URL, APP_NAME} = publicRuntimeConfig
 
     const handleSignIn = (id: string) => {
         dispatch(showPageLoader())
         setTimeout(() => dispatch(hidePageLoader()), 1500)
-        signIn(id, { callbackUrl: `${NEXTAUTH_URL}/dashboard` })
+        signIn(id, {callbackUrl: `${NEXTAUTH_URL}/dashboard`})
     }
 
     return (
@@ -36,7 +36,7 @@ const Index: React.FC<Props> = ({ providers }) => {
             <Head>
                 <title>{APP_NAME} - Budget planner</title>
                 <meta name="description" content="Automate your budget"/>
-                <meta name="author" content="niko" />
+                <meta name="author" content="niko"/>
                 <meta name="theme-color" content="#DA291C"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta property="og:image" content="https://next-test-js.vercel.app/index.jpg"/>
@@ -53,13 +53,13 @@ const Index: React.FC<Props> = ({ providers }) => {
                     <div className={styles.content}>
                         <div className={styles.login}>
                             <h1 className={`${textStyles.selected} ${styles.title}`}>Budget planner</h1>
-                            <h2 className={textStyles.selected}>Our free Budget Planner puts you in control of your household spending and analyses your results to help you take control of your money</h2>
+                            <h2 className={textStyles.selected}>Our free Budget Planner puts you in control of your
+                                household spending and analyses your results to help you take control of your money</h2>
                             <i className={styles.line}></i>
                             <span className={styles.label}>Sign in with:</span>
                             <AuthProviderList
                                 providers={providers}
                                 signIn={handleSignIn}
-                                justifyContent={'center'}
                             />
                         </div>
                     </div>

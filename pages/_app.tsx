@@ -13,7 +13,7 @@ interface MyAppProps extends AppProps {}
 
 const progress = new ProgressBar({
     size: 3,
-    color: '#0078d4',
+    color: '#DA291C',
     className: 'bar-of-progress',
     delay: 100,
 })

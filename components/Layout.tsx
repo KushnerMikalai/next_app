@@ -29,7 +29,7 @@ export default function Layout({children, session}: LayoutProps) {
                             data-category="Site-Wide Custom Events"
                             data-label="Site logo"
                         >
-                            {APP_NAME}
+                            🤑{APP_NAME}
                         </a>
                     </Link>
                     <Nav/>

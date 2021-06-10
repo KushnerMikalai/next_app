@@ -1,5 +1,6 @@
 import React from 'react'
 import UiButton from '../components/ui/UiButton'
+import styles from '../styles/AuthProviderList.module.css'
 
 interface Provider {
     name: string
@@ -9,35 +10,23 @@ interface Provider {
 interface Props {
     providers: Provider[]
     signIn: (id: string) => void
-    justifyContent: string
 }
 
-const AuthProviderList: React.FC<Props> = ({ providers, signIn, justifyContent }) => {
+const AuthProviderList: React.FC<Props> = ({providers, signIn}) => {
     return (
-        <div className="provider-list">
+        <div className={styles.providerList}>
             {Object.values(providers).map((provider) => (
                 <div
-                    className="provider-button"
+                    className={styles.providerButton}
                     key={provider.name}
                 >
                     <UiButton
                         iconCustom={`/icons/icon-${provider.name.toLowerCase()}.svg`}
                         text={provider.name}
                         onClick={() => signIn(provider.id)}
-                    ></UiButton>
+                    />
                 </div>
             ))}
-
-            <style jsx>{`
-                .provider-list {
-                    display: flex;
-                    justify-content: ${justifyContent};
-                }
-
-                .provider-button:not(:last-child) {
-                    margin-right: 10px;
-                }
-            `}</style>
         </div>
     )
 }

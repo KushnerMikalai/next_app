@@ -19,6 +19,7 @@
 
 .title {
     margin-top: 0;
+    font-family: initial;
 }
 
 .content h2 {
@@ -33,7 +34,6 @@
     margin-top: 0;
     font-size: 14px;
     font-weight: 400;
-    font-family: var(--primaryFontFamily);
 }
 
 .line {
